@@ -70,23 +70,8 @@
         this.render();
       },
 
-      connection: function () {
-        var mysql = require('mysql');
-        var con = mysql.createConnection({
-          host: 'localhost',
-          user: 'root',
-          password: 'root'
-        });
-        con.connect(function(err){
-          if(err) throw err;
-          console.log('connected');
-        });
-      },
-
       render: function () {
-        //this.$el.html(this.template(this.model.toJSON()));
-        //return this; // enable chained calls
-        console.log('ciao');
+
       },
 
       save: function () {
@@ -94,8 +79,10 @@
         var todoItem = $('#new_todo').val();
         if (todoItem) {
           var todoModel = new app.TodoModel({ title: todoItem });
+          todoModel.save();
           app.todoCollection.add(todoModel);
           console.log(app.todoCollection);
+          console.log(todoModel.get("title"));
           this.viewList.append(this.template(todoModel.toJSON()));
         }
       },
